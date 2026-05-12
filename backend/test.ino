@@ -3,10 +3,9 @@
 #include <WebSocketsServer.h>
 #include <ArduinoJson.h>
 
-// ====== EDIT THESE ======
 const char* WIFI_SSID = "realme 13+ 5G";
 const char* WIFI_PASS = "123456789";
-// ========================
+
 
 const uint8_t TRIG_PINS[4] = {32, 26, 12, 31};
 const uint8_t ECHO_PINS[4] = {35, 27, 13, 30};
@@ -20,8 +19,8 @@ float readDistanceCm(uint8_t trig, uint8_t echo) {
   delayMicroseconds(10);
   digitalWrite(trig, LOW);
 
-  long duration = pulseIn(echo, HIGH, 30000); // 30ms timeout
-  if (duration == 0) return 999.0;            // no echo => empty
+  long duration = pulseIn(echo, HIGH, 30000);
+  if (duration == 0) return 999.0;            
   return duration * 0.0343 / 2.0;
 }
 
@@ -69,7 +68,7 @@ void loop() {
     float d[4];
     for (int i = 0; i < 4; i++) {
       d[i] = readDistanceCm(TRIG_PINS[i], ECHO_PINS[i]);
-      delay(30); // avoid sensor crosstalk
+      delay(30); 
     }
 
     StaticJsonDocument<200> doc;
